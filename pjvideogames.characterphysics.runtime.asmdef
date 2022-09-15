@@ -1,0 +1,14 @@
+{
+    "name": "pjvideogames.characterphysics.runtime",
+    "rootNamespace": "CharacterPhysics",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

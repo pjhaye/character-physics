@@ -1,0 +1,15 @@
+{
+  "name": "com.pjvideogames.characterphysics",
+  "version": "0.0.1",
+  "displayName": "Character Physics",
+  "description": "Functionality for basic character control",
+  "unity": "2021.1",
+  "keywords": [
+    "characters"
+  ],
+  "author": {
+    "name": "PJ Haye",
+    "email": "pj.haye@gmail.com"
+  },
+  "type": "module"
+}
