@@ -93,7 +93,7 @@ namespace CharacterPhysics
         private float _groundCheckStartHeight = 0.15f;
         [SerializeField]
         private float _groundCheckDistance = 0.25f;
-        [SerializeField]
+        
         private Vector3 _velocity;
         
         private CharacterController _characterController;
