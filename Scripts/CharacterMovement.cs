@@ -2,6 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.Serialization;
 
 namespace CharacterPhysics
 {
@@ -10,11 +11,11 @@ namespace CharacterPhysics
     public class CharacterMovement : MonoBehaviour
     {
         [SerializeField]
-        private float _maxRunSpeed = 3.0f;
+        private float _maxRunSpeed = 5.0f;
         [SerializeField]
-        private float _acceleration = 3.0f;
+        private float _acceleration = 15.0f;
         [SerializeField]
-        private float _decceleration = 3.0f;
+        private float _deceleration = 20.0f;
         [SerializeField]
         private float _airControl = 0.5f;
         [SerializeField]
@@ -42,8 +43,8 @@ namespace CharacterPhysics
 
         public float Decceleration
         {
-            get => _decceleration;
-            set => _decceleration = value;
+            get => _deceleration;
+            set => _deceleration = value;
         }
 
         public float AirControl
