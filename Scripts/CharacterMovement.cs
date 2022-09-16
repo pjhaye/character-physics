@@ -152,7 +152,7 @@ namespace CharacterPhysics
 
             if (RotateTowardAcceleration)
             {
-                var targetRotation = Quaternion.LookRotation(xzDirection.normalized);
+                var targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0.0f, direction.z));
                 
                 _characterBody.WorldRotation = Quaternion.RotateTowards(
                     _characterBody.WorldRotation,
