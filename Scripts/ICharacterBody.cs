@@ -21,5 +21,6 @@ namespace CharacterPhysics
 
         public void MoveBy(Vector3 movement);
         public void MoveTo(Vector3 position);
+        public void TeleportTo(Vector3 position);
     }
 }
