@@ -10,7 +10,7 @@ namespace CharacterPhysics
         [SerializeField]
         private Vector3 _gravity = new Vector3(0.0f, -9.1f, 0.0f);
         [SerializeField]
-        private float _restingGravity = 0.01f;
+        private float _restingGravity = -0.2f;
         
         private ICharacterBody _characterBody;
 
