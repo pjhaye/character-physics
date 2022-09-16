@@ -159,6 +159,11 @@ namespace CharacterPhysics
             {
                 _isTouchingGround = false;
             }
+
+            if ((collisionFlags & CollisionFlags.Above) != 0 && Velocity.y > 0.0f)
+            {
+                Velocity = new Vector3(Velocity.x, 0.0f, Velocity.z);
+            }
         }
 
         public void MoveBy(Vector3 movement)
@@ -169,6 +174,12 @@ namespace CharacterPhysics
         public void MoveTo(Vector3 position)
         {
             _movementsThisFrame.Add(position - WorldPosition);
+        }
+
+        public void TeleportTo(Vector3 position)
+        {
+            _movementsThisFrame.Clear();
+            WorldPosition = position;
         }
     }
 }
