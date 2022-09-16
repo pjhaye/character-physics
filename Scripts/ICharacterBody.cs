@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -6,6 +7,10 @@ namespace CharacterPhysics
 {
     public interface ICharacterBody
     {
+        public event EventHandler StartedTouchingGround;
+        public event EventHandler StoppedTouchingGround;
+        public event EventHandler<CharacterBodyHitInfo> HitCollider; 
+
         public Vector3 Up { get; }
         public Vector3 Forward { get; }
         public Vector3 Right { get; }

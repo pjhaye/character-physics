@@ -104,7 +104,7 @@ namespace CharacterPhysics
             var xzMovement = new Vector3(_characterBody.Velocity.x, 0.0f, _characterBody.Velocity.z);
             var xzSpeed = xzMovement.magnitude;
             xzSpeed -= (_characterBody.IsTouchingGround ? Decceleration : AirDecceleration) * deltaTime;
-            
+
             if (xzSpeed < 0.0f)
             {
                 xzSpeed = 0.0f;

@@ -7,6 +7,10 @@ namespace CharacterPhysics
     [RequireComponent(typeof(CharacterController))]
     public class UnityCharacterBody : MonoBehaviour, ICharacterBody
     {
+        public event EventHandler StartedTouchingGround;
+        public event EventHandler StoppedTouchingGround;
+        public event EventHandler<CharacterBodyHitInfo> HitCollider;
+
         public Vector3 Up => transform.up;
         
         public Vector3 Forward => transform.forward;
@@ -149,15 +153,25 @@ namespace CharacterPhysics
             }
             
             _movementsThisFrame.Clear();
+
+            var wasTouchingGround = IsTouchingGround;
             
             var collisionFlags = _characterController.Move(totalMovement);
             if ((collisionFlags & CollisionFlags.Below) != 0 || didStickToSlope)
             {
                 _isTouchingGround = true;
+                if (!wasTouchingGround)
+                {
+                    StartedTouchingGround?.Invoke(this, null);
+                }
             }
             else
             {
                 _isTouchingGround = false;
+                if (wasTouchingGround)
+                {
+                    StoppedTouchingGround?.Invoke(this, null);
+                }
             }
 
             if ((collisionFlags & CollisionFlags.Above) != 0 && Velocity.y > 0.0f)
@@ -174,6 +188,18 @@ namespace CharacterPhysics
         public void MoveTo(Vector3 position)
         {
             _movementsThisFrame.Add(position - WorldPosition);
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            HitCollider?.Invoke(this, new CharacterBodyHitInfo()
+            {
+                Collider = hit.collider,
+                Normal = hit.normal,
+                Point = hit.point,
+                Distance = hit.moveLength, 
+                MovementDirection = hit.moveDirection
+            });
         }
 
         public void TeleportTo(Vector3 position)
