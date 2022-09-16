@@ -1,8 +1,4 @@
-using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using UnityEngine.Serialization;
 
 namespace CharacterPhysics
 {
@@ -80,8 +76,7 @@ namespace CharacterPhysics
         {
             _characterBody.Velocity = force;
         }
-
-        [Button]
+        
         public void Jump(float jumpForce)
         {
             var jumpVelocity = _characterBody.Velocity;
