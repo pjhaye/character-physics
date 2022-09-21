@@ -87,7 +87,8 @@ namespace CharacterPhysics
 
         private void FixedUpdate()
         {
-            if (!_acceleratedLastFrame)
+            var xzVelocity = new Vector3(_characterBody.Velocity.x, 0.0f, _characterBody.Velocity.z);
+            if (!_acceleratedLastFrame && xzVelocity.magnitude > 0.0f)
             {
                 Decelerate(Time.deltaTime);
             }
@@ -119,18 +120,26 @@ namespace CharacterPhysics
             
             var xzMovement = new Vector3(_characterBody.Velocity.x, 0.0f, _characterBody.Velocity.z);
 
+            var accelerationStrength = Acceleration;
             if (!_characterBody.IsTouchingGround)
             {
-                strength *= AirControl;
+                accelerationStrength *= AirControl;
             }
+
+            var prevSpeed = xzMovement.magnitude; 
+            var targetSpeed = MaxRunSpeed * strength;
             
-            xzMovement += new Vector3(direction.x, 0.0f, direction.z) * (Acceleration * deltaTime);
+            xzMovement += new Vector3(direction.x, 0.0f, direction.z) * (accelerationStrength * deltaTime);
 
             var xzSpeed = xzMovement.magnitude;
+
+            if (prevSpeed <= targetSpeed && xzSpeed > targetSpeed)
+            {
+                xzSpeed = targetSpeed;
+            }
+            
             var xzDirection = xzMovement.normalized;
-
-            var targetSpeed = MaxRunSpeed * strength;
-
+            
             if (targetSpeed < xzSpeed)
             {
                 xzSpeed -= Decceleration * deltaTime;
