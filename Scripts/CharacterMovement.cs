@@ -124,11 +124,22 @@ namespace CharacterPhysics
                 strength *= AirControl;
             }
             
-            xzMovement += new Vector3(direction.x, 0.0f, direction.z) * (Acceleration * strength * deltaTime);
+            xzMovement += new Vector3(direction.x, 0.0f, direction.z) * (Acceleration * deltaTime);
 
             var xzSpeed = xzMovement.magnitude;
             var xzDirection = xzMovement.normalized;
 
+            var targetSpeed = MaxRunSpeed * strength;
+
+            if (targetSpeed < xzSpeed)
+            {
+                xzSpeed -= Decceleration;
+                if (xzSpeed < targetSpeed)
+                {
+                    xzSpeed = targetSpeed;
+                }
+            }
+            
             if (xzSpeed >= MaxRunSpeed)
             {
                 xzSpeed = MaxRunSpeed;
