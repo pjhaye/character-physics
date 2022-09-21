@@ -133,7 +133,7 @@ namespace CharacterPhysics
 
             if (targetSpeed < xzSpeed)
             {
-                xzSpeed -= Decceleration;
+                xzSpeed -= Decceleration * deltaTime;
                 if (xzSpeed < targetSpeed)
                 {
                     xzSpeed = targetSpeed;
