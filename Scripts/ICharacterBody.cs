@@ -21,6 +21,7 @@ namespace CharacterPhysics
         public Quaternion WorldRotation { get; set; }
         public Vector3 WorldEulerAngles { get; set; }
         public float Height { get; }
+        public float Radius { get; }
         public Vector3 Velocity { get; set; }
         public bool IsTouchingGround { get; }
 
