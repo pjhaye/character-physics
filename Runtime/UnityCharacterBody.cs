@@ -11,6 +11,31 @@ namespace CharacterPhysics
         public event EventHandler StoppedTouchingGround;
         public event EventHandler<CharacterBodyHitInfo> HitCollider;
 
+        [SerializeField]
+        private float _groundCheckStartHeight = 0.15f;
+        [SerializeField]
+        private float _groundCheckDistance = 0.25f;
+        
+        private Vector3 _velocity;
+        
+        private CharacterController _characterController;
+
+        private List<Vector3> _movementsThisFrame = new List<Vector3>();
+        private bool _isTouchingGround = false;
+        
+        public bool Enabled
+        {
+            get
+            {
+                return enabled;
+            }
+            set
+            {
+                _characterController.enabled = value;
+                enabled = value;
+            }
+        }
+
         public Vector3 Up => transform.up;
         
         public Vector3 Forward => transform.forward;
@@ -92,18 +117,6 @@ namespace CharacterPhysics
             get => _velocity;
             set => _velocity = value;
         }
-
-        [SerializeField]
-        private float _groundCheckStartHeight = 0.15f;
-        [SerializeField]
-        private float _groundCheckDistance = 0.25f;
-        
-        private Vector3 _velocity;
-        
-        private CharacterController _characterController;
-
-        private List<Vector3> _movementsThisFrame = new List<Vector3>();
-        private bool _isTouchingGround = false;
 
         public bool IsTouchingGround
         {
@@ -204,8 +217,10 @@ namespace CharacterPhysics
 
         public void TeleportTo(Vector3 position)
         {
+            _characterController.enabled = false;
             _movementsThisFrame.Clear();
             WorldPosition = position;
+            _characterController.enabled = true;
         }
     }
 }

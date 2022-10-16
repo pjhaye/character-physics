@@ -11,6 +11,7 @@ namespace CharacterPhysics
         public event EventHandler StoppedTouchingGround;
         public event EventHandler<CharacterBodyHitInfo> HitCollider; 
 
+        public bool Enabled {get; set;}
         public Vector3 Up { get; }
         public Vector3 Forward { get; }
         public Vector3 Right { get; }
