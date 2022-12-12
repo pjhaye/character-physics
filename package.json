@@ -1,6 +1,6 @@
 {
   "name": "com.pjvideogames.characterphysics",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "displayName": "Character Physics",
   "description": "Functionality for basic character control",
   "unity": "2021.1",

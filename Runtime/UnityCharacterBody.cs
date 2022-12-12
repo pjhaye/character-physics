@@ -15,6 +15,8 @@ namespace CharacterPhysics
         private float _groundCheckStartHeight = 0.15f;
         [SerializeField]
         private float _groundCheckDistance = 0.25f;
+        [SerializeField]
+        private LayerMask _groundCullingLayer;
         
         private Vector3 _velocity;
         
@@ -22,7 +24,43 @@ namespace CharacterPhysics
 
         private List<Vector3> _movementsThisFrame = new List<Vector3>();
         private bool _isTouchingGround = false;
+
+        public float GroundCheckStartHeight
+        {
+            get
+            {
+                return _groundCheckStartHeight;
+            }
+            set
+            {
+                _groundCheckStartHeight = value;
+            }
+        }
+
+        public float GroundCheckDistance
+        {
+            get
+            {
+                return _groundCheckDistance;
+            }
+            set
+            {
+                _groundCheckDistance = value;
+            }
+        }
         
+        public LayerMask GroundCullingLayer
+        {
+            get
+            {
+                return _groundCullingLayer;
+            }
+            set
+            {
+                _groundCullingLayer = value;
+            }
+        }
+
         public bool Enabled
         {
             get
@@ -139,7 +177,7 @@ namespace CharacterPhysics
             if (IsTouchingGround && movementVelocity.y < 0.0f)
             {
                 var raycast = new Ray(WorldBottom + Up * _groundCheckStartHeight, -Up);
-                if (Physics.Raycast(raycast, out var raycastHit, _groundCheckStartHeight + _groundCheckDistance))
+                if (Physics.Raycast(raycast, out var raycastHit, _groundCheckStartHeight + _groundCheckDistance, _groundCullingLayer))
                 {
                     if (raycastHit.point.y < WorldBottom.y)
                     {
