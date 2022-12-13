@@ -238,7 +238,12 @@ namespace CharacterPhysics
 
         public void MoveTo(Vector3 position)
         {
-            _movementsThisFrame.Add(position - WorldPosition);
+            var accumulatedWorldPosition = WorldPosition;
+            foreach (var movement in _movementsThisFrame)
+            {
+                accumulatedWorldPosition += movement;
+            }
+            _movementsThisFrame.Add(position - accumulatedWorldPosition);
         }
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
